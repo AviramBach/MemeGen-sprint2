@@ -1,0 +1,68 @@
+.edit-tools-container {
+
+
+    box-shadow: 1px 3px 0 #bbc4d1, inset 0 3px 0 #bbc4d1;
+    border-radius: 30px;
+    background-color: rgba(169, 169, 169, 0.7);
+    padding: 20px;
+    text-align: center;
+
+    /* flex: 1;  */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.edit-tools-container>* {
+    margin-top: 24px;
+    justify-content: center;
+    display: flex;
+
+
+}
+
+.text-editor-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    width: 100%;
+    height: 20%;
+    border-radius: 15px;
+    background-color: #19a59f;
+}
+
+    
+        
+
+
+.text-input {
+    width: 200px;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 28px;
+    background-color: #ebeef3;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 22px;
+}
+
+/* box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 28px;
+    font-size: 22px;
+    border: 1px solid black;
+    background-color: #ebeef3; */
+
+
+.font-selector {
+    width: 120px;
+    cursor: pointer;
+    border: 1px solid black;
+    box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 28px;
+    background-color: #ebeef3;
+    text-align: center;
+    font-size: 22px;
+}
+

@@ -1,0 +1,70 @@
+/* For screen widths up to 768px */
+ /* @media (max-width: 1030px) {
+    .editor {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        gap: 20px;
+    } */
+
+    /* .edit-tools-container {
+        width: 400px; */ 
+        /* height: 300px; */
+        /* max-width: 400px; */
+        /* display: flex; */
+        
+    /* } */
+
+    /* .canvas-container { */
+        /* width: 100%; */
+        /* padding: 10px; */
+    /* } */
+
+     /* .my-canvas {
+        width: 400px;
+        height: 400px;
+    }  */
+
+/* }  */
+
+/* For screen widths above 768px */
+/* @media (min-width: 700px) { */
+
+    /* .edit-tools-container {
+        width: auto;
+        max-width: none;
+        box-shadow: 1px 3px 0 #bbc4d1, inset 0 3px 0 #bbc4d1;
+        border-radius: 30px;
+        background-color: rgba(169, 169, 169, 0.7);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit-tools-container>* {
+        margin-top: 24px;
+    }
+
+    .text-input {
+        width: 200px;
+        height: 30px;
+        margin-top: 24px;
+        box-shadow: 1px 3px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+        border-radius: 28px;
+        background-color: #ebeef3;
+    }
+
+    .canvas-container {
+        flex: 1;
+        width: auto;
+        padding-left: 20px;
+    } */
+
+    /* .my-canvas {
+        width: 600px;
+        height: 600px;
+    } */
+/* } 

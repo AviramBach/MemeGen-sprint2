@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemeGenerator</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body onload="onInit()">
+    <header class="main-header">
+        <nav class="nav-bar">
+
+            <div class="logo">
+                MemeGen
+                <!-- <img src="" alt="meme-generator-logo"> -->
+            </div>
+
+            <ul class="link-bar  ">
+                <li><a href="#" class="editor-link" onclick="onShowSection('editor')">Editor</a></li>
+                <li><a href="#" class="gallery-link" onclick="onShowSection('gallery')">Gallery</a></li>
+                <li><a href="#" class="saved-link" onclick="onShowSection('saved-memes')">Saved</a></li>
+                <li><a href="#" class="about-link" onclick="onShowSection('about')">About</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main class="main-container">
+
+        <section class="editor">
+            <div class="edit-tools-container">
+
+                <div class="text-input-container">
+                    <input class="text-input" type="text" id="text-input" placeholder="Enter your text" />
+                </div>
+
+                <div class="text-position">
+                    <button onclick="onMoveLine('up')">▲</button>
+                    <button onclick="onMoveLine('down')">▼</button>
+                </div>
+
+                <div class="line-editor-container">
+                    <button onclick="onAddLine()">&#43;</button>
+                    <button onclick="onSwitchLine()">Switch line</button>
+                    <button onclick="onDeleteLine()"><i class="fa fa-trash"></i></a></button>
+                </div>
+
+
+
+
+                <div class="text-editor-container">
+                    <div class="font-family-selector">
+                        <select id="fontSelector" class="font-selector" onchange="onChangeFontFamily()">
+                            <option value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Georgia">Georgia</option>
+                        </select>
+                    </div>
+                    <div class="font-size">
+                        <button onclick="onIncreaseFontSize()">A+</button>
+                        <button onclick="onDecreaseFontSize()">A-</button>
+                    </div>
+
+                    <div class="text-alignment">
+                        <button onclick="onTextAlign('right')">Left</button>
+                        <button onclick="onTextAlign('center')">Center</button>
+                        <button onclick="onTextAlign('left')">Right</button>
+                    </div>
+
+                    <div class="text-color-select">
+                        <label for="favcolor"></label>
+                        <input class="paint-brush" type="color" id="favcolor" name="text-color" value="#ffffff">
+                    </div>
+                </div>
+
+                <button class="btn-save" onclick="onSaveCanvas()">Save</button>
+                <h2>
+                    <a href="#" class="btn-download" onclick="onDownloadCanvas(this)">Download Meme</a>
+                </h2>
+
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="my-canvas" class="my-canvas" width="600" height="600"
+                    style="outline: 2px solid rgb(15, 17, 15)"></canvas>
+            </div>
+
+
+        </section>
+
+
+
+        <section class="gallery hidden">
+            <nav>
+                <button onclick="onFlexibleMeme()" class="btn btn-flexible ">I'm flexible</button>
+            </nav>
+            <div class="imgs-container">
+                <!-- <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt=""> -->
+                <!-- <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+            <img src="img/5.jpg" alt="">
+            <img src="img/6.jpg" alt="">
+            <img src="img/7.jpg" alt="">
+            <img src="img/8.jpg" alt="">
+            <img src="img/9.jpg" alt="">
+            <img src="img/10.jpg" alt="">
+            <img src="img/11.jpg" alt="">
+            <img src="img/12.jpg" alt="">
+            <img src="img/13.jpg" alt="">
+            <img src="img/14.jpg" alt="">
+            <img src="img/15.jpg" alt="">
+            <img src="img/16.jpg" alt="">
+            <img src="img/17.jpg" alt="">
+            <img src="img/18.jpg" alt=""> -->
+            </div>
+
+        </section>
+
+        <section class="about hidden">
+            <!-- About content goes here -->
+        </section>
+
+        <section class="saved-memes hidden">
+            <h2>Saved Memes</h2>
+            <div class="saved-memes-container"></div>
+        </section>
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+    <!-- <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" /> -->
+
+
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
+    <script src="js/galleryController.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="https://kit.fontawesome.com/cde9d74e30.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
