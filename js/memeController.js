@@ -418,3 +418,9 @@ function addSavedMemeClickListener() {
         }
     });
 }
+
+
+function loadMemeForEditing(meme) {
+    gMeme = meme;
+    renderMeme();
+}

@@ -7,3 +7,7 @@
 .saved-memes-container>*{
     margin: 10px;
 }
+
+.saved-memes h2{
+    color: white;
+}
