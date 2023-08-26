@@ -30,8 +30,6 @@
     color: #ffffff;
 }
 
-
-
 .link-bar {
     display: flex;
     justify-content: space-between;
@@ -52,4 +50,17 @@
 
 .link-bar a:hover {
     color: #f7d426; 
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    margin: 3px 0;
+    background-color: #fff;
 }

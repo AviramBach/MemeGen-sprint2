@@ -15,7 +15,7 @@ function onInit() {
     renderGallery()
     renderSavedMemes()
     // renderCanvas()
-    
+
     console.log('gCtx', gCtx)
 }
 
@@ -32,7 +32,6 @@ function onInit() {
 //     gElCanvas.height = elContainer.offsetHeight   
 // }
 
-
 function onShowSection(sectionId) {
     const sections = document.querySelectorAll('section')
     sections.forEach(section => {
@@ -40,7 +39,6 @@ function onShowSection(sectionId) {
     })
     const targetSection = document.querySelector(`.${sectionId}`)
     targetSection.classList.remove('hidden')
-
     if (sectionId === 'saved') {
         renderSavedMemes()
     }
@@ -52,12 +50,19 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     addSelectListeners()
-    
     addSavedMemeClickListener()
+    addMenuClickListeners()
     // window.addEventListener('resize', () => {
     //     resizeCanvas()
     //     renderMeme()
     // })
+}
+function addMenuClickListeners() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu')
+    const navLinks = document.querySelector('.link-bar')
+    hamburgerMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active')
+    })
 }
 
 function addSelectListeners() {
@@ -78,16 +83,14 @@ function addChangeListeners() {
 }
 
 function onSetTextColor(selectedColor) {
-
     const { selectedLineIdx, lines } = getMeme()
     console.log(' getMeme()', getMeme())
-
     lines.forEach((line, idx) => {
         if (line.isSwitched === true) {
             line.color = selectedColor
             renderMeme()
             return
-        } 
+        }
     })
 
     if (lines.length === 1) {
@@ -100,13 +103,6 @@ function onSetTextColor(selectedColor) {
 function onSetTextInput(event) {
     const newText = event.target.value
     const { selectedLineIdx, lines } = getMeme()
-
-    // if (lines.length > 1) {
-    //     lines.forEach((line) => {
-    //         line.txt = newText
-    //     })
-    // }
-    // lines[selectedLineIdx].txt = newText
 
     lines.forEach((line, idx) => {
         if (line.isSwitched === true) {
@@ -130,9 +126,6 @@ function onDownloadCanvas(elLink) {
 }
 
 function onIncreaseFontSize() {
-    // const { selectedLineIdx, lines } = getMeme() 
-    // lines[selectedLineIdx].size += 2
-
     const { lines } = getMeme()
     lines.forEach((line) => {
         if (line.isSwitched === true) {
@@ -147,13 +140,6 @@ function onIncreaseFontSize() {
 }
 
 function onDecreaseFontSize() {
-
-    // const { selectedLineIdx, lines } = getMeme()
-    // if (lines[selectedLineIdx].size > 10) {
-    //     lines[selectedLineIdx].size -= 2
-    //     renderMeme()
-    // }
-
     const { lines } = getMeme()
     lines.forEach((line) => {
         if (line.isSwitched === true) {
@@ -194,18 +180,15 @@ function addTouchListeners() {
 }
 
 function getEvPos(ev) {
-
     let pos = {
         x: ev.offsetX,
         y: ev.offsetY,
     }
 
     if (TOUCH_EVS.includes(ev.type)) {
-        // Prevent triggering the mouse ev
+       
         ev.preventDefault()
-        // Gets the first touch point
         ev = ev.changedTouches[0]
-        // Calc the right pos according to the touch screen
         pos = {
             x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
             y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
@@ -214,15 +197,11 @@ function getEvPos(ev) {
     return pos
 }
 
-
-
 function onDown(ev) {
     const pos = getEvPos(ev)
-
     const clickedLineIdx = gMeme.lines.findIndex(line =>
         isPointInLineBounds(pos, line)
     )
-
     if (clickedLineIdx !== -1) {
         toggleLineSelection(clickedLineIdx)
     } else {
@@ -231,10 +210,9 @@ function onDown(ev) {
         })
     }
     renderMeme()
-    // document.body.style.cursor = 'pointer'
+    document.body.style.cursor = 'pointer'
 
 }
-
 
 function setLineSwitched(lineIdx, isSwitched) {
     gMeme.lines[lineIdx].isSwitched = isSwitched
@@ -304,25 +282,19 @@ function onChangeFontFamily() {
             line.font = selectedFont
         }
     })
-
     if (lines.length === 1) {
         lines[0].font = selectedFont
     }
     renderMeme()
 }
 
-
 function onFlexibleMeme() {
     clearCanvas()
     const { lines } = getMeme()
-    
-    
-    const randomText =  makeLorem(4)
+    const randomText = makeLorem(4)
     const randomFontSize = getRandomInt(15, 40)
-    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16)
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
     const randomAlignment = ['left', 'center', 'right'][getRandomInt(0, 3)]
-    
-    
     const randomImageId = getRandomInt(1, gImgs.length)
     const selectedImg = document.querySelector(`.img${randomImageId}`)
     if (selectedImg) {
@@ -333,7 +305,6 @@ function onFlexibleMeme() {
         selectedImg.classList.add('selected')
         setImg(selectedImg)
     }
-
     lines.push({
         txt: randomText,
         size: randomFontSize,
@@ -342,11 +313,8 @@ function onFlexibleMeme() {
         alignment: randomAlignment,
         font: 'Impact',
         pos: { x: gElCanvas.width / 2, y: gElCanvas.height / 2 }
-    });
-
-    
+    })
     gMeme.selectedLineIdx = lines.length - 1
-    
     renderMeme()
 }
 
@@ -360,67 +328,48 @@ function clearCanvas() {
     gCtx.clearRect(0, 0, canvasWidth, canvasHeight)
 }
 
-
-
-
-
-
-
-
-
-
-
 function onSaveCanvas() {
-    const dataUrl = gElCanvas.toDataURL();
-    const memeToSave = { dataUrl, lines: gMeme.lines };
-    saveMemeToStorage(memeToSave);
+    const dataUrl = gElCanvas.toDataURL()
+    const memeToSave = { dataUrl, lines: gMeme.lines }
+    saveMemeToStorage(memeToSave)
     renderSavedMemes()
-    alert('Meme saved successfully!');
-
+    alert('Meme saved successfully!')
 }
 
 function loadSavedMemes() {
-    const savedMemes = loadFromStorage(STORAGE_KEY) || [];
-    console.log('Saved Memes Loaded:', savedMemes); // Add this line
-    return savedMemes;
+    const savedMemes = loadFromStorage(STORAGE_KEY) || []
+    console.log('Saved Memes Loaded:', savedMemes)
+    return savedMemes
 }
 
-// Display saved memes in the "Saved Memes" section
 function renderSavedMemes() {
-    const savedMemesContainer = document.querySelector('.saved-memes-container');
-    savedMemesContainer.innerHTML = ''; // Clear existing content
-
-    const savedMemes = loadSavedMemes();
-    console.log('Rendering Saved Memes:', savedMemes); // Add this line
-
+    const savedMemesContainer = document.querySelector('.saved-memes-container')
+    savedMemesContainer.innerHTML = '' 
+    const savedMemes = loadSavedMemes()
+    console.log('Rendering Saved Memes:', savedMemes)
     savedMemes.forEach((meme, idx) => {
-        const memeImg = new Image();
-        memeImg.src = meme.dataUrl;
-        memeImg.alt = `Saved Meme ${idx}`;
-        savedMemesContainer.appendChild(memeImg);
-    });
+        const memeImg = new Image()
+        memeImg.src = meme.dataUrl
+        memeImg.alt = `Saved Meme ${idx}`
+        savedMemesContainer.appendChild(memeImg)
+    })
 }
 
 function addSavedMemeClickListener() {
-    const savedMemesContainer = document.querySelector('.saved-memes-container');
+    const savedMemesContainer = document.querySelector('.saved-memes-container')
     savedMemesContainer.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG') {
-            const savedMemes = loadSavedMemes();
-            const clickedMemeIdx = Array.from(savedMemesContainer.children).indexOf(event.target);
-            const clickedMeme = savedMemes[clickedMemeIdx];
-
-            // Update gMeme with loaded meme data
-            gMeme.lines = clickedMeme.lines;
-            gMeme.selectedLineIdx = 0; // Assuming you want to select the first line
-
-            // Render the loaded meme on the canvas
-            renderMeme();
+            const savedMemes = loadSavedMemes()
+            const clickedMemeIdx = Array.from(savedMemesContainer.children).indexOf(event.target)
+            const clickedMeme = savedMemes[clickedMemeIdx]
+            gMeme.lines = clickedMeme.lines
+            gMeme.selectedLineIdx = 0
+            renderMeme()
         }
-    });
+    })
 }
 
-
 function loadMemeForEditing(meme) {
-    gMeme = meme;
-    renderMeme();
+    gMeme = meme
+    renderMeme()
 }

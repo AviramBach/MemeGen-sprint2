@@ -60,14 +60,7 @@ function renderMeme() {
     }
 }
 
-
-
 function renderLine(selectedLineIdx, lines) {
-
-    // const lineTxt = lines[selectedLineIdx].txt
-    // const lineSize = lines[selectedLineIdx].size
-    // const lineColor = lines[selectedLineIdx].color
-
     lines.forEach((line, idx) => {
         const lineTxt = line.txt
         const lineSize = line.size
@@ -77,44 +70,20 @@ function renderLine(selectedLineIdx, lines) {
         const lineFont = line.font
         const x = line.pos.x
         const y = line.pos.y
-
         const textWidth = gCtx.measureText(lineTxt).width
         line.width = textWidth
-        line.height = lineSize
-        // const isSelectedLine = idx === selectedLineIdx
-        // let y
-        // if (idx === 0) {
-        //     y = gElCanvas.height * 0.1
-        // } else if (idx === 1) {
-        //     y = gElCanvas.height * 0.9
-        // }
-        // else {
-        //     y = gElCanvas.height * 0.5
-
-        // }
+        line.height = lineSize 
         setLineTxt(lineTxt, lineSize, lineColor, lineIsSwitched, lineAlignment, lineFont, x, y)
-
-        // if (isSelectedLine) {
-        //     gCtx.strokeStyle = 'blue'
-        //     gCtx.lineWidth = 2;
-        //     gCtx.strokeRect(x - line.width / 2, y - line.height / 2, line.width, line.height);
-        // }
     })
 }
 
 function setLineTxt(text, size, color, isSwitched, alignment, font, x = 80, y = 80) {
-    // const maxWidth = gElCanvas.width - 2
-
     gCtx.lineWidth = 1
-    // gCtx.strokeStyle = color
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     gCtx.textAlign = alignment
     gCtx.textBaseline = 'middle'
     gCtx.fillText(text, x, y)
-
-    // gCtx.strokeText(text, x, y)
-
 
     if (isSwitched) {
         drawFrame(text, size, alignment, x, y)
@@ -138,8 +107,7 @@ function drawFrame(text, size, alignment, x, y) {
     } else {
         x = x
     }
-
-    const frameY = y - size / 2 - framePadding
+    // const frameY = y - size / 2 - framePadding
 
     gCtx.beginPath()
     // gCtx.setLineDash([5, 5])
@@ -158,7 +126,6 @@ function drawFrame(text, size, alignment, x, y) {
 }
 
 function setImg(elImg) {
-
     const imageId = elImg.dataset.id
     gMeme.selectedImgId = imageId
     renderMeme()
@@ -169,10 +136,6 @@ function addLine() {
     const canvasHeight = gElCanvas.height
     const canvasWidth = gElCanvas.width
 
-    // let xValue = gMeme.lines[selectedLineIdx].pos.x 
-    // let yValue = gMeme.lines[selectedLineIdx].pos.y
-    // let newLineSize = gMeme.lines[selectedLineIdx].size
-    // let newLineColor = gMeme.lines[selectedLineIdx].color
     let newLineSize = 30
     let newLineColor = 'white'
     let yValue = canvasHeight / 2
@@ -194,13 +157,11 @@ function addLine() {
 
 function switchLine() {
     const { selectedLineIdx, lines } = getMeme()
-
     console.log('selectedLineIdx', selectedLineIdx)
 
     lines.forEach((line) => {
         line.isSwitched = false
     })
-
     lines[selectedLineIdx].isSwitched = true
 
     if (selectedLineIdx < lines.length - 1) {
@@ -210,26 +171,19 @@ function switchLine() {
     if (selectedLineIdx === lines.length - 1) {
         gMeme.selectedLineIdx = 0
     }
-
-
     console.log('selectedLineIdx after', selectedLineIdx)
 }
 
 function isLineClicked(clickedPos) {
-    const { lines } = getMeme() // or just gMeme? or gMeme.lines.pos
+    const { lines } = getMeme() 
 
-    // Calc the distance between two dots
-    // const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
-    // console.log('distance', distance)
-    // // If its smaller then the radius of the circle we are inside
-    // return distance <= gMeme.size
     for (let i = 0; i < lines.length; i++) {
-        const { pos, size } = lines[i]; // Get the position and size of the current line
-        const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2);
+        const { pos, size } = lines[i]
+        const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
         console.log("clicked in line")
         if (distance <= size / 2) {
             console.log("clicked in line")
-            return i; // Return the index of the clicked line
+            return i
         }
     }
 }
@@ -256,42 +210,41 @@ function toggleLineSelection(lineIdx) {
 
 
 function saveMemeToStorage(meme) {
-    const savedMemes = loadFromStorage(STORAGE_KEY) || [];
-    savedMemes.push(meme);
-    saveToStorage(STORAGE_KEY, savedMemes);
+    const savedMemes = loadFromStorage(STORAGE_KEY) || []
+    savedMemes.push(meme)
+    saveToStorage(STORAGE_KEY, savedMemes)
 }
 
 function loadSavedMemes() {
-    const savedMemes = loadFromStorage(STORAGE_KEY) || [];
+    const savedMemes = loadFromStorage(STORAGE_KEY) || []
 
-    const savedMemesSection = document.querySelector('.saved-memes');
-    savedMemesSection.innerHTML = '';
+    const savedMemesSection = document.querySelector('.saved-memes')
+    savedMemesSection.innerHTML = ''
 
     savedMemes.forEach((meme, index) => {
-        const memeContainer = document.createElement('div');
-        memeContainer.classList.add('saved-meme');
+        const memeContainer = document.createElement('div')
+        memeContainer.classList.add('saved-meme')
 
-        const memeImg = new Image();
-        memeImg.src = meme.dataUrl;
-        memeImg.alt = `Saved Meme ${index + 1}`;
+        const memeImg = new Image()
+        memeImg.src = meme.dataUrl
+        memeImg.alt = `Saved Meme ${index + 1}`
 
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
+        const editButton = document.createElement('button')
+        editButton.textContent = 'Edit'
         editButton.addEventListener('click', () => {
-            loadMemeForEditing(meme);
-        });
+            loadMemeForEditing(meme)
+        })
 
-        memeContainer.appendChild(memeImg);
-        memeContainer.appendChild(editButton);
-        savedMemesSection.appendChild(memeContainer);
-    });
+        memeContainer.appendChild(memeImg)
+        memeContainer.appendChild(editButton)
+        savedMemesSection.appendChild(memeContainer)
+    })
 
-    onShowSection('saved-memes'); // Show the saved memes section
+    onShowSection('saved-memes')
 }
 
-
 function loadMemeForEditing(meme) {
-    gMeme = meme;
-    renderMeme();
-    onShowSection('editor'); // Show the editor section
+    gMeme = meme
+    renderMeme()
+    onShowSection('editor')
 }

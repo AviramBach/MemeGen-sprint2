@@ -17,7 +17,13 @@
                 <!-- <img src="" alt="meme-generator-logo"> -->
             </div>
 
-            <ul class="link-bar  ">
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <ul class="link-bar">
                 <li><a href="#" class="editor-link" onclick="onShowSection('editor')">Editor</a></li>
                 <li><a href="#" class="gallery-link" onclick="onShowSection('gallery')">Gallery</a></li>
                 <li><a href="#" class="saved-link" onclick="onShowSection('saved-memes')">Saved</a></li>
@@ -28,7 +34,6 @@
     </header>
 
     <main class="main-container">
-
         <section class="editor">
             <div class="edit-tools-container">
 
@@ -36,19 +41,21 @@
                     <input class="text-input" type="text" id="text-input" placeholder="Enter your text" />
                 </div>
                 <div class="line-opations-container">
-                    <div class="text-position">
-                        <button onclick="onMoveLine('up')">▲</button>
-                        <button onclick="onMoveLine('down')">▼</button>
-                    </div>
 
                     <div class="line-editor-container">
-                        <button class="btn-add-line" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
-                        <button class="btn-switch-line" onclick="onSwitchLine()"><i class="fa-solid fa-arrows-up-down"></i></button>
-                        <button class="btn-delete-line" onclick="onDeleteLine()"><i class="fa fa-trash"></i></a></button>
+                        <div class="text-position">
+                            <button onclick="onMoveLine('up')">▲</button>
+                            <button onclick="onMoveLine('down')">▼</button>
+                        </div>
+                        <div class="text-user-options">
+                            <button class="btn-add-line" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+                            <button class="btn-switch-line" onclick="onSwitchLine()"><i
+                                    class="fa-solid fa-arrows-up-down"></i></button>
+                            <button class="btn-delete-line" onclick="onDeleteLine()"><i
+                                    class="fa fa-trash"></i></a></button>
+                        </div>
                     </div>
                 </div>
-
-
 
                 <div class="text-editor-container">
                     <div class="font-family-selector">
@@ -80,6 +87,7 @@
                 <div class="meme-options">
                     <!-- <button class="btn-save" onclick="onSaveCanvas()">Save</button> -->
                     <h2>
+                        <!-- <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" /> -->
                         <a href="#" class="btn-download" onclick="onDownloadCanvas(this)"><i
                                 class="fa-solid fa-download"></i></a>
                     </h2>
@@ -93,10 +101,7 @@
             <div class="canvas-container">
                 <canvas id="my-canvas" class="my-canvas" width="500" height="500"></canvas>
             </div>
-
         </section>
-
-
 
         <section class="gallery hidden">
             <nav>
@@ -104,9 +109,7 @@
                         class="fa-solid fa-shuffle"></i></button>
             </nav>
             <div class="imgs-container">
-           
             </div>
-
         </section>
 
         <section class="about hidden">
@@ -121,10 +124,7 @@
 
     <footer>
 
-
     </footer>
-
-    <!-- <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" /> -->
 
 
     <script src="js/memeService.js"></script>
