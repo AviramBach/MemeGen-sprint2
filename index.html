@@ -77,19 +77,17 @@
                         <input class="paint-brush" type="color" id="favcolor" name="text-color" value="#ffffff">
                     </div>
                 </div>
-
-                <button class="btn-save" onclick="onSaveCanvas()">Save</button>
-                <h2>
-                    <a href="#" class="btn-download" onclick="onDownloadCanvas(this)">Download Meme</a>
-                </h2>
-
+                <div class="meme-options">
+                    <button class="btn-save" onclick="onSaveCanvas()">Save</button>
+                    <h2>
+                        <a href="#" class="btn-download" onclick="onDownloadCanvas(this)">Download</a>
+                    </h2>
+                </div>
             </div>
 
             <div class="canvas-container">
-                <canvas id="my-canvas" class="my-canvas" width="600" height="600"
-                    style="outline: 2px solid rgb(15, 17, 15)"></canvas>
+                <canvas id="my-canvas" class="my-canvas" width="600" height="600"></canvas> 
             </div>
-
 
         </section>
 

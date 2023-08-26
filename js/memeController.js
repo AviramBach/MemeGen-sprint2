@@ -13,6 +13,7 @@ function onInit() {
 
     renderMeme()
     renderGallery()
+    renderSavedMemes()
     // renderCanvas()
     
     console.log('gCtx', gCtx)
@@ -41,7 +42,7 @@ function onShowSection(sectionId) {
     targetSection.classList.remove('hidden')
 
     if (sectionId === 'saved') {
-        renderSavedMemes(); // Render saved memes when "Saved" section is shown
+        renderSavedMemes()
     }
 }
 
@@ -51,7 +52,8 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     addSelectListeners()
-
+    
+    addSavedMemeClickListener()
     // window.addEventListener('resize', () => {
     //     resizeCanvas()
     //     renderMeme()
@@ -215,7 +217,7 @@ function getEvPos(ev) {
 
 
 function onDown(ev) {
-    const pos = getEvPos(ev);
+    const pos = getEvPos(ev)
 
     const clickedLineIdx = gMeme.lines.findIndex(line =>
         isPointInLineBounds(pos, line)
@@ -273,7 +275,7 @@ function onDeleteLine() {
         }
     })
     if (indexToDelete !== -1) {
-        lines.splice(indexToDelete, 1);
+        lines.splice(indexToDelete, 1)
     }
     renderMeme()
 }
@@ -285,10 +287,8 @@ function onTextAlign(align) {
         if (line.isSwitched === true) {
             line.alignment = align
             const textWidth = gCtx.measureText(line.txt).width;
-            line.width = textWidth;
-
-            // Pass the alignment of the text to drawFrame
-            drawFrame(line.txt, line.size, line.alignment, line.pos.x, line.pos.y);
+            line.width = textWidth
+            drawFrame(line.txt, line.size, line.alignment, line.pos.x, line.pos.y)
         }
     })
     renderMeme()
@@ -334,7 +334,6 @@ function onFlexibleMeme() {
         setImg(selectedImg)
     }
 
-    
     lines.push({
         txt: randomText,
         size: randomFontSize,
@@ -399,5 +398,23 @@ function renderSavedMemes() {
         memeImg.src = meme.dataUrl;
         memeImg.alt = `Saved Meme ${idx}`;
         savedMemesContainer.appendChild(memeImg);
+    });
+}
+
+function addSavedMemeClickListener() {
+    const savedMemesContainer = document.querySelector('.saved-memes-container');
+    savedMemesContainer.addEventListener('click', (event) => {
+        if (event.target.tagName === 'IMG') {
+            const savedMemes = loadSavedMemes();
+            const clickedMemeIdx = Array.from(savedMemesContainer.children).indexOf(event.target);
+            const clickedMeme = savedMemes[clickedMemeIdx];
+
+            // Update gMeme with loaded meme data
+            gMeme.lines = clickedMeme.lines;
+            gMeme.selectedLineIdx = 0; // Assuming you want to select the first line
+
+            // Render the loaded meme on the canvas
+            renderMeme();
+        }
     });
 }

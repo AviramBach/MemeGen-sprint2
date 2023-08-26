@@ -131,26 +131,26 @@ function drawFrame(text, size, alignment, x, y) {
     // Calculate frame position based on alignment
     
     if (alignment === 'left') {
-        x = x - framePadding + frameWidth / 2;
+        x = x - framePadding + frameWidth / 2
     } else if (alignment === 'right') {
-        x = x + framePadding - frameWidth / 2;
+        x = x + framePadding - frameWidth / 2
     } else {
-        x = x;
+        x = x
     }
 
-    const frameY = y - size / 2 - framePadding;
+    const frameY = y - size / 2 - framePadding
 
     gCtx.beginPath()
     // gCtx.setLineDash([5, 5])
-    gCtx.moveTo(x - textWidth / 2 - framePadding + cornerRadius, y - size / 2 - framePadding);
-    gCtx.lineTo(x + textWidth / 2 + framePadding - cornerRadius, y - size / 2 - framePadding);
-    gCtx.arc(x + textWidth / 2 + framePadding - cornerRadius, y - size / 2 - framePadding + cornerRadius, cornerRadius, -Math.PI / 2, 0);
+    gCtx.moveTo(x - textWidth / 2 - framePadding + cornerRadius, y - size / 2 - framePadding)
+    gCtx.lineTo(x + textWidth / 2 + framePadding - cornerRadius, y - size / 2 - framePadding)
+    gCtx.arc(x + textWidth / 2 + framePadding - cornerRadius, y - size / 2 - framePadding + cornerRadius, cornerRadius, -Math.PI / 2, 0)
     gCtx.lineTo(x + textWidth / 2 + framePadding, y + size / 2 + framePadding - cornerRadius);
-    gCtx.arc(x + textWidth / 2 + framePadding - cornerRadius, y + size / 2 + framePadding - cornerRadius, cornerRadius, 0, Math.PI / 2);
+    gCtx.arc(x + textWidth / 2 + framePadding - cornerRadius, y + size / 2 + framePadding - cornerRadius, cornerRadius, 0, Math.PI / 2)
     gCtx.lineTo(x - textWidth / 2 - framePadding + cornerRadius, y + size / 2 + framePadding);
-    gCtx.arc(x - textWidth / 2 - framePadding + cornerRadius, y + size / 2 + framePadding - cornerRadius, cornerRadius, Math.PI / 2, Math.PI);
+    gCtx.arc(x - textWidth / 2 - framePadding + cornerRadius, y + size / 2 + framePadding - cornerRadius, cornerRadius, Math.PI / 2, Math.PI)
     gCtx.lineTo(x - textWidth / 2 - framePadding, y - size / 2 - framePadding + cornerRadius);
-    gCtx.arc(x - textWidth / 2 - framePadding + cornerRadius, y - size / 2 - framePadding + cornerRadius, cornerRadius, Math.PI, -Math.PI / 2);
+    gCtx.arc(x - textWidth / 2 - framePadding + cornerRadius, y - size / 2 - framePadding + cornerRadius, cornerRadius, Math.PI, -Math.PI / 2)
     gCtx.closePath();
     gCtx.strokeStyle = 'yellow'
     gCtx.stroke()
@@ -159,7 +159,6 @@ function drawFrame(text, size, alignment, x, y) {
 function setImg(elImg) {
 
     const imageId = elImg.dataset.id
-
     gMeme.selectedImgId = imageId
     renderMeme()
 }
