@@ -205,43 +205,12 @@ function toggleLineSelection(lineIdx) {
     })
 }
 
-
-
-
-
 function saveMemeToStorage(meme) {
     const savedMemes = loadFromStorage(STORAGE_KEY) || []
     savedMemes.push(meme)
     saveToStorage(STORAGE_KEY, savedMemes)
 }
 
-function loadSavedMemes() {
-    const savedMemes = loadFromStorage(STORAGE_KEY) || []
-
-    const savedMemesSection = document.querySelector('.saved-memes')
-    savedMemesSection.innerHTML = ''
-
-    savedMemes.forEach((meme, index) => {
-        const memeContainer = document.createElement('div')
-        memeContainer.classList.add('saved-meme')
-
-        const memeImg = new Image()
-        memeImg.src = meme.dataUrl
-        memeImg.alt = `Saved Meme ${index + 1}`
-
-        const editButton = document.createElement('button')
-        editButton.textContent = 'Edit'
-        editButton.addEventListener('click', () => {
-            loadMemeForEditing(meme)
-        })
-
-        memeContainer.appendChild(memeImg)
-        memeContainer.appendChild(editButton)
-        savedMemesSection.appendChild(memeContainer)
-    })
-
-    onShowSection('saved-memes')
-}
 
 function loadMemeForEditing(meme) {
     gMeme = meme

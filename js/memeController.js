@@ -7,30 +7,11 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-
+    renderSavedMemes()
     addListeners()
-    // resizeCanvas()
-
     renderMeme()
     renderGallery()
-    renderSavedMemes()
-    // renderCanvas()
-
-    console.log('gCtx', gCtx)
 }
-
-// function renderCanvas() {
-//     //Set the backgournd color to grey
-//     gCtx.fillStyle = '#ede5ff'
-//     //Clear the canvas,  fill it with grey background
-//     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
-// }
-
-// function resizeCanvas() {
-//     const elContainer = document.querySelector('.canvas-container')
-//     gElCanvas.width = elContainer.offsetWidth
-//     gElCanvas.height = elContainer.offsetHeight   
-// }
 
 function onShowSection(sectionId) {
     const sections = document.querySelectorAll('section')
@@ -52,10 +33,6 @@ function addListeners() {
     addSelectListeners()
     addSavedMemeClickListener()
     addMenuClickListeners()
-    // window.addEventListener('resize', () => {
-    //     resizeCanvas()
-    //     renderMeme()
-    // })
 }
 function addMenuClickListeners() {
     const hamburgerMenu = document.querySelector('.hamburger-menu')
@@ -169,14 +146,10 @@ function onSwitchLine() {
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
-    // gElCanvas.addEventListener('mousemove', onMove)
-    // gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function addTouchListeners() {
     gElCanvas.addEventListener('touchstart', onDown)
-    // gElCanvas.addEventListener('touchmove', onMove)
-    // gElCanvas.addEventListener('touchend', onUp)
 }
 
 function getEvPos(ev) {
@@ -233,16 +206,8 @@ function onMoveLine(direction) {
             }
         }
     })
-    // if (lines.length === 1) {
-    //     if (direction === 'up') {
-    //         lines[0].pos.y = Math.max(lines[0].size / 2, lines[0].pos.y - 10)
-    //     } else if (direction === 'down') {
-    //         lines[0].pos.y = Math.min(canvasHeight - lines[0].size / 2, lines[0].pos.y + 10)
-    //     }
-    // }
     renderMeme()
 }
-
 
 function onDeleteLine() {
     const { lines } = getMeme()
@@ -330,7 +295,7 @@ function clearCanvas() {
 
 function onSaveCanvas() {
     const dataUrl = gElCanvas.toDataURL()
-    const memeToSave = { dataUrl, lines: gMeme.lines }
+    const memeToSave = { dataUrl, lines: gMeme.lines, id: gMeme.selectedImgIdSelected }
     saveMemeToStorage(memeToSave)
     renderSavedMemes()
     alert('Meme saved successfully!')
@@ -344,14 +309,20 @@ function loadSavedMemes() {
 
 function renderSavedMemes() {
     const savedMemesContainer = document.querySelector('.saved-memes-container')
-    savedMemesContainer.innerHTML = '' 
+    savedMemesContainer.innerHTML = ''
     const savedMemes = loadSavedMemes()
-    console.log('Rendering Saved Memes:', savedMemes)
+
     savedMemes.forEach((meme, idx) => {
         const memeImg = new Image()
         memeImg.src = meme.dataUrl
         memeImg.alt = `Saved Meme ${idx}`
+    
         savedMemesContainer.appendChild(memeImg)
+
+        memeImg.addEventListener('click', () => {
+            // Load and render the selected meme for editing
+            renderMeme()
+        })
     })
 }
 
@@ -363,13 +334,10 @@ function addSavedMemeClickListener() {
             const clickedMemeIdx = Array.from(savedMemesContainer.children).indexOf(event.target)
             const clickedMeme = savedMemes[clickedMemeIdx]
             gMeme.lines = clickedMeme.lines
-            gMeme.selectedLineIdx = 0
+            gMeme.selectedLineIdx = 0 
             renderMeme()
         }
     })
 }
 
-function loadMemeForEditing(meme) {
-    gMeme = meme
-    renderMeme()
-}
+

@@ -2,7 +2,6 @@
 
 
 function renderGallery() {
-
     const galleryContainer = document.querySelector('.imgs-container')
     let strHTML = ''
 
@@ -22,6 +21,5 @@ function onSelectImg(elImg){
     selectedImg.classList.add('selected')
 
     setImg(elImg)
-    renderMeme()
-    
+    renderMeme()   
 }
