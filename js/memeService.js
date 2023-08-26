@@ -35,12 +35,13 @@ var gMeme = {
             alignment: 'center',
             font: 'Impact',
             pos: {
-                x: 300,
+                x: 250,
                 y: 30
             }
         }
     ]
 }
+
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 function getMeme() {
@@ -113,7 +114,7 @@ function setLineTxt(text, size, color, isSwitched, alignment, font, x = 80, y = 
     gCtx.fillText(text, x, y)
 
     // gCtx.strokeText(text, x, y)
-    
+
 
     if (isSwitched) {
         drawFrame(text, size, alignment, x, y)
@@ -124,12 +125,12 @@ function drawFrame(text, size, alignment, x, y) {
     const textWidth = gCtx.measureText(text).width
     const framePadding = 8
     const cornerRadius = 10
-    
+
     const frameWidth = textWidth + 2 * framePadding;
     const frameHeight = size + 2 * framePadding;
 
     // Calculate frame position based on alignment
-    
+
     if (alignment === 'left') {
         x = x - framePadding + frameWidth / 2
     } else if (alignment === 'right') {
@@ -194,29 +195,29 @@ function addLine() {
 function switchLine() {
     const { selectedLineIdx, lines } = getMeme()
 
-    console.log('selectedLineIdx',selectedLineIdx)
-    
+    console.log('selectedLineIdx', selectedLineIdx)
+
     lines.forEach((line) => {
         line.isSwitched = false
     })
 
     lines[selectedLineIdx].isSwitched = true
-    
+
     if (selectedLineIdx < lines.length - 1) {
         gMeme.selectedLineIdx = selectedLineIdx + 1
-       
+
     }
     if (selectedLineIdx === lines.length - 1) {
-        gMeme.selectedLineIdx = 0   
+        gMeme.selectedLineIdx = 0
     }
 
 
-    console.log('selectedLineIdx after',selectedLineIdx)
+    console.log('selectedLineIdx after', selectedLineIdx)
 }
 
 function isLineClicked(clickedPos) {
     const { lines } = getMeme() // or just gMeme? or gMeme.lines.pos
-    
+
     // Calc the distance between two dots
     // const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
     // console.log('distance', distance)
@@ -235,7 +236,7 @@ function isLineClicked(clickedPos) {
 
 function isPointInLineBounds(point, line) {
     return (
-        point.x >= line.pos.x - line.width / 2  &&
+        point.x >= line.pos.x - line.width / 2 &&
         point.x <= line.pos.x + line.width / 2 &&
         point.y >= line.pos.y - line.height / 2 &&
         point.y <= line.pos.y + line.height / 2
@@ -244,7 +245,7 @@ function isPointInLineBounds(point, line) {
 
 function toggleLineSelection(lineIdx) {
     const { lines } = getMeme()
-    
+
     lines.forEach((line, idx) => {
         line.isSwitched = idx === lineIdx
     })

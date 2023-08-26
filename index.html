@@ -35,18 +35,18 @@
                 <div class="text-input-container">
                     <input class="text-input" type="text" id="text-input" placeholder="Enter your text" />
                 </div>
+                <div class="line-opations-container">
+                    <div class="text-position">
+                        <button onclick="onMoveLine('up')">▲</button>
+                        <button onclick="onMoveLine('down')">▼</button>
+                    </div>
 
-                <div class="text-position">
-                    <button onclick="onMoveLine('up')">▲</button>
-                    <button onclick="onMoveLine('down')">▼</button>
+                    <div class="line-editor-container">
+                        <button class="btn-add-line" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+                        <button class="btn-switch-line" onclick="onSwitchLine()"><i class="fa-solid fa-arrows-up-down"></i></button>
+                        <button class="btn-delete-line" onclick="onDeleteLine()"><i class="fa fa-trash"></i></a></button>
+                    </div>
                 </div>
-
-                <div class="line-editor-container">
-                    <button onclick="onAddLine()">&#43;</button>
-                    <button onclick="onSwitchLine()">Switch line</button>
-                    <button onclick="onDeleteLine()"><i class="fa fa-trash"></i></a></button>
-                </div>
-
 
 
 
@@ -60,33 +60,38 @@
                             <option value="Verdana">Verdana</option>
                             <option value="Georgia">Georgia</option>
                         </select>
-                    </div>
-                    <div class="font-size">
-                        <button onclick="onIncreaseFontSize()">A+</button>
-                        <button onclick="onDecreaseFontSize()">A-</button>
-                    </div>
 
-                    <div class="text-alignment">
-                        <button onclick="onTextAlign('right')">Left</button>
-                        <button onclick="onTextAlign('center')">Center</button>
-                        <button onclick="onTextAlign('left')">Right</button>
-                    </div>
+                        <div class="font-size">
+                            <button onclick="onIncreaseFontSize()">A+</button>
+                            <button onclick="onDecreaseFontSize()">A-</button>
+                        </div>
 
+                        <div class="text-alignment">
+                            <button onclick="onTextAlign('right')"><i class="fa-solid fa-align-left"></i></button>
+                            <button onclick="onTextAlign('center')"><i class="fa-solid fa-align-center"></i></button>
+                            <button onclick="onTextAlign('left')"><i class="fa-solid fa-align-right"></i></button>
+                        </div>
+                    </div>
                     <div class="text-color-select">
                         <label for="favcolor"></label>
                         <input class="paint-brush" type="color" id="favcolor" name="text-color" value="#ffffff">
                     </div>
                 </div>
                 <div class="meme-options">
-                    <button class="btn-save" onclick="onSaveCanvas()">Save</button>
+                    <!-- <button class="btn-save" onclick="onSaveCanvas()">Save</button> -->
                     <h2>
-                        <a href="#" class="btn-download" onclick="onDownloadCanvas(this)">Download</a>
+                        <a href="#" class="btn-download" onclick="onDownloadCanvas(this)"><i
+                                class="fa-solid fa-download"></i></a>
+                    </h2>
+                    <h2>
+                        <a href="#" class="btn-save" onclick="onSaveCanvas()"><i
+                                class="fa-solid fa-floppy-disk"></i></a>
                     </h2>
                 </div>
             </div>
 
             <div class="canvas-container">
-                <canvas id="my-canvas" class="my-canvas" width="600" height="600"></canvas> 
+                <canvas id="my-canvas" class="my-canvas" width="500" height="500"></canvas>
             </div>
 
         </section>
@@ -95,7 +100,8 @@
 
         <section class="gallery hidden">
             <nav>
-                <button onclick="onFlexibleMeme()" class="btn btn-flexible ">I'm flexible</button>
+                <button onclick="onFlexibleMeme()" class="btn btn-flexible ">I'm flexible<i
+                        class="fa-solid fa-shuffle"></i></button>
             </nav>
             <div class="imgs-container">
                 <!-- <img src="img/1.jpg" alt="">

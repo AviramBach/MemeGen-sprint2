@@ -4,21 +4,35 @@
     box-shadow: 1px 3px 0 #bbc4d1, inset 0 3px 0 #bbc4d1;
     border-radius: 30px;
     background-color: rgba(169, 169, 169, 0.7);
-    padding: 20px;
+    padding: 5px;
     text-align: center;
 
-    /* flex: 1;  */
+    flex: 0; 
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .edit-tools-container>* {
     margin-top: 24px;
     justify-content: center;
     display: flex;
-
+    
 
 }
+
+/* .line-opations-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    
+    height: 20%;
+    border-radius: 15px;
+    background-color: #19a59f;
+    box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+} */
 
 .text-editor-container {
     display: flex;
@@ -26,43 +40,60 @@
     align-items: center;
     gap: 5px;
     padding: 5px;
-    width: 100%;
-    height: 20%;
+    /* width: 100%; */
+    height: 30%;
     border-radius: 15px;
     background-color: #19a59f;
+    box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
 }
-
-    
-        
-
 
 .text-input {
-    width: 200px;
-    height: 30px;
+    width: 10em;
+    height: 2.5em;
     cursor: pointer;
     box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
     border-radius: 28px;
-    background-color: #ebeef3;
+    background-color: #f8f8f8;
     text-align: center;
     border: 1px solid black;
-    font-size: 22px;
+    font-size: 1.5em;
 }
 
-/* box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
-    border-radius: 28px;
-    font-size: 22px;
-    border: 1px solid black;
-    background-color: #ebeef3; */
-
-
+.font-family-selector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 10em;
+    margin: 1em;
+    
+}
 .font-selector {
-    width: 120px;
+    width: 80%;
+    height: 100%;
     cursor: pointer;
     border: 1px solid black;
     box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
     border-radius: 28px;
-    background-color: #ebeef3;
+    background-color: #f8f8f8;
     text-align: center;
-    font-size: 22px;
+    font-size: 1.5em;
+    width: 5em;
+}
+
+.paint-brush{
+    font-size: 2em;
+    height: 2em; 
+    color: #fff;
+    cursor: pointer;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0 5px;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 3px;
+    text-decoration: none;
+    display: flex; 
+    align-items: center;
+    box-shadow: 1px 3px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
 }
 

@@ -1,31 +1,31 @@
 /* For screen widths up to 768px */
- /* @media (max-width: 1030px) {
+ @media (max-width: 1030px) { 
     .editor {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
         justify-content: center;
         height: 100%;
         width: 100%;
         gap: 20px;
-    } */
+    } 
 
-    /* .edit-tools-container {
-        width: 400px; */ 
-        /* height: 300px; */
+    .edit-tools-container {
+        width: 20em; 
+       
         /* max-width: 400px; */
         /* display: flex; */
         
-    /* } */
+    }
 
     /* .canvas-container { */
         /* width: 100%; */
         /* padding: 10px; */
     /* } */
 
-     /* .my-canvas {
-        width: 400px;
-        height: 400px;
-    }  */
+     .my-canvas {
+        width: 500px;
+        height: 500px;
+    } 
 
 /* }  */
 
@@ -63,8 +63,8 @@
         padding-left: 20px;
     } */
 
-    /* .my-canvas {
-        width: 600px;
-        height: 600px;
-    } */
+     /* .my-canvas {
+        width: 800px;
+        height: 800px;
+    }  */
 /* } 
