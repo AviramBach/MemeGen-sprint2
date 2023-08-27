@@ -2,6 +2,8 @@
 
 let gElCanvas
 let gCtx
+let gIsDragging = false
+let gDraggedLineIdx = -1
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
@@ -11,6 +13,7 @@ function onInit() {
     addListeners()
     renderMeme()
     renderGallery()
+    toggleArrowRotation()
 }
 
 function onShowSection(sectionId) {
@@ -33,6 +36,7 @@ function addListeners() {
     addSelectListeners()
     addSavedMemeClickListener()
     addMenuClickListeners()
+    window.addEventListener('scroll', toggleArrowRotation)
 }
 function addMenuClickListeners() {
     const hamburgerMenu = document.querySelector('.hamburger-menu')
@@ -146,10 +150,15 @@ function onSwitchLine() {
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function addTouchListeners() {
     gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
+
 }
 
 function getEvPos(ev) {
@@ -177,14 +186,33 @@ function onDown(ev) {
     )
     if (clickedLineIdx !== -1) {
         toggleLineSelection(clickedLineIdx)
+        updateTextInputValue(clickedLineIdx)
+        gIsDragging = true
+        gDraggedLineIdx = clickedLineIdx
+        document.body.style.cursor = 'grabbing'
     } else {
         gMeme.lines.forEach((line) => {
             line.isSwitched = false
         })
+        updateTextInputValue(-1)
     }
     renderMeme()
     document.body.style.cursor = 'pointer'
+}
 
+function onMove(ev) {
+    if (gIsDragging) {
+        const pos = getEvPos(ev)
+        gMeme.lines[gDraggedLineIdx].pos.x = pos.x
+        gMeme.lines[gDraggedLineIdx].pos.y = pos.y
+        renderMeme()
+    }
+}
+
+function onUp() {
+    gIsDragging = false
+    gDraggedLineIdx = -1
+    document.body.style.cursor = 'default'
 }
 
 function setLineSwitched(lineIdx, isSwitched) {
@@ -320,7 +348,6 @@ function renderSavedMemes() {
         savedMemesContainer.appendChild(memeImg)
 
         memeImg.addEventListener('click', () => {
-            // Load and render the selected meme for editing
             renderMeme()
         })
     })

@@ -1,6 +1,4 @@
 @media (max-width: 1030px) {
-    body {}
-
     .editor {
         flex-direction: column-reverse;
         align-items: center;
@@ -126,4 +124,42 @@
         font-size: 1.2rem;
         margin: 10px 0;
     }
+
+    
+}
+
+
+@media (max-width: 680px) {
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 1.5em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1em;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.modal .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    transform: translate(-50%, -50%) rotate(180deg);
+    color: white;
+}
+
+.modal.show-top{
+    top: 2em;
+}
+
+.modal.show-top .arrow {
+    color: yellow;
+    /* font-size: 1.2em; */
+}
 }

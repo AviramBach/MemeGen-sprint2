@@ -194,7 +194,7 @@ function isPointInLineBounds(point, line) {
         point.x <= line.pos.x + line.width / 2 &&
         point.y >= line.pos.y - line.height / 2 &&
         point.y <= line.pos.y + line.height / 2
-    );
+    )
 }
 
 function toggleLineSelection(lineIdx) {
@@ -211,9 +211,19 @@ function saveMemeToStorage(meme) {
     saveToStorage(STORAGE_KEY, savedMemes)
 }
 
-
 function loadMemeForEditing(meme) {
     gMeme = meme
     renderMeme()
     onShowSection('editor')
+}
+
+function updateTextInputValue(lineIdx) {
+    const textInput = document.querySelector('.text-input')
+    const { lines } = getMeme()
+
+    if (lineIdx !== -1 && lineIdx < lines.length) {
+        textInput.value = lines[lineIdx].txt
+    } else {
+        textInput.value = ''
+    }
 }
