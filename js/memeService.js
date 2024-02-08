@@ -35,7 +35,7 @@ var gMeme = {
             alignment: 'center',
             font: 'Impact',
             pos: {
-                x: 250,
+                x: 175,
                 y: 30
             }
         }
